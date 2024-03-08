@@ -1,0 +1,67 @@
+OUTPUTS: 'output'
+
+data:
+  note_path: data/competition_data/cutmed_notes.csv
+  annotations_path: data/competition_data/cutmed_fixed_train_annotations.csv
+  sctid_syn_path: data/preprocess_data
+
+n_fold: 4
+split: 0
+chunked_repeat: 10
+
+IS_MASTER: False
+competition: 'snom'
+val: False
+apex: True
+print_freq: 100
+num_workers: 4
+
+model: "microsoft/BiomedNLP-BiomedBERT-large-uncased-abstract"
+
+scheduler: 'linear'
+batch_scheduler: True
+num_cycles: 0.5
+num_warmup_steps: 100
+epochs: 100
+model_EMA: .997
+encoder_lr: 0.00005
+decoder_lr: 0.00005
+min_lr: 0.00002
+eps: 0.000001
+betas: [0.9, 0.999]
+batch_size: 8
+fc_dropout: 0.05
+max_len: 512
+weight_decay: 0.01
+gradient_accumulation_steps: 4
+max_grad_norm: 1000
+seed: 42
+
+
+class_weights: [0.142, 0.571, 0.571, 0.571, 0.571, 0.571, 0.571]
+
+PARALLEL:
+  DDP: false
+  GPUS: [0]
+  LOCAL_RANK: ${oc.decode:${oc.env:LOCAL_RANK, 0}}
+  WORLD_SIZE: ${oc.decode:${oc.env:WORLD_SIZE, 0}}
+
+torch:
+  benchmark: True
+  deterministic: False
+  detect_anomaly: False
+  channels_last: False
+  cuda_allow_tf32: True
+  cudnn_allow_tf32: True
+  sync_bn: False
+  find_unused_parameters: True
+  broadcast_buffers: True
+
+
+hydra:
+  output_subdir: null # Disable saving of config files. We'll do that ourselves.
+  run:
+    dir: ./output/.hydra_out/${now:%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir : ./output/.hydra_out/${now:%m-%d}/${now:%H-%M-%S}_SWEEP
+    subdir: J${hydra.job.num}

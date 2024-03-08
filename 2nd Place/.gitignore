@@ -1,0 +1,16 @@
+**/.ipynb*
+**/*.csv
+**/*.pth
+**/__py*
+input
+output
+outputs
+losses
+t
+screenlog*
+multirun
+export
+data
+assets
+mlmtra
+notebooks

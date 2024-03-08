@@ -1,0 +1,36 @@
+name: snomedct
+channels:
+  - defaults
+  - conda-forge
+  - xformers
+  - pytorch
+  - nvidia
+dependencies:
+  - libgcc-ng=11.2.0
+  - openssl=3.0.12
+  - pip==24.0
+  - python=3.11.7
+  - wheel=0.41.2
+  - pip:
+      - accelerate==0.27.2
+      - appdirs==1.4.4
+      - bitsandbytes==0.42.0
+      - datasets==2.17.0
+      - faiss-gpu==1.7.4
+      - ipython==8.20.0
+      - langchain-community==0.0.13
+      - langchain-core==0.1.12
+      - langchain==0.1.1
+      - loguru==0.7.2
+      - notebook==7.0.7
+      - numpy==1.26.4
+      - pandas==2.2.0
+      - peft==0.8.2
+      - sentence-transformers==2.2.2
+      - torch==2.1.2
+      - tqdm==4.66.2
+      - transformers==4.37.2
+      - trl==0.7.10
+      - typer==0.9.0
+      - vllm==0.3.0
+      - wandb==0.16.2
